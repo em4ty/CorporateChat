@@ -9,7 +9,7 @@ private slots:
         QString username = "alice";
         QString password = "12345";
         
-        // Имитация проверки логина
+ 
         bool loginSuccess = (username == "alice" && password == "12345");
         QVERIFY(loginSuccess == true);
     }
@@ -24,7 +24,7 @@ private slots:
     
     void testRegistration() {
         QString newUser = "bob";
-        bool userExists = false; // проверка что пользователь новый
+        bool userExists = false;  
         QVERIFY(userExists == false);
     }
 };
