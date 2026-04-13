@@ -9,15 +9,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Install Qt6
       run: |
         sudo apt-get update
-        sudo apt-get install -y qt6-base-dev qt6-tools-dev qt6-network-dev libsqlite3-dev
-        
+        sudo apt-get install -y qt6-base-dev qt6-tools-dev
+
     - name: Build Server
       run: |
         cd ServerChat
@@ -25,7 +25,7 @@ jobs:
         cd build
         cmake ..
         cmake --build . --config Release
-    
+
     - name: Build Client
       run: |
         cd ClientChat
@@ -33,13 +33,13 @@ jobs:
         cd build
         cmake ..
         cmake --build . --config Release
-    
+
     - name: Upload Server Artifact
       uses: actions/upload-artifact@v4
       with:
         name: ServerChat
         path: ServerChat/build/ServerChat
-    
+
     - name: Upload Client Artifact
       uses: actions/upload-artifact@v4
       with:
