@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LoginWindow</class>
+ <widget class="QWidget" name="LoginWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Вход в чат</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="dialog-information"/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #f0f0f0;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QTabWidget::pane {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+}
+QTabBar::tab {
+    padding: 8px 16px;
+    margin-right: 2px;
+}
+QTabBar::tab:selected {
+    background-color: #0078d7;
+    color: white;
+}</string>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>🔐 Вход</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLineEdit" name="usernameEdit">
+         <property name="placeholderText">
+          <string>👤 Имя пользователя</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="passwordEdit">
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>🔒 Пароль</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="loginButton">
+         <property name="text">
+          <string>🚀 Войти</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px;
+}
+QPushButton:hover {
+    background-color: #218838;
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>📝 Регистрация</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLineEdit" name="regUsernameEdit">
+         <property name="placeholderText">
+          <string>👤 Имя пользователя</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="regPasswordEdit">
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>🔒 Пароль</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="regConfirmEdit">
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>🔒 Подтверждение пароля</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="registerButton">
+         <property name="text">
+          <string>📝 Зарегистрироваться</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton {
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 5px;
+}
+QPushButton:hover {
+    background-color: #005a9e;
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="statusLabel">
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>💡 Введите данные для входа</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+    color: #6c757d;
+    padding: 5px;
+}</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+</ui>
