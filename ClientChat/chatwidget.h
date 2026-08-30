@@ -20,15 +20,21 @@ public:
                         QWidget *parent = nullptr);
     ~ChatWidget();
 
+public:
+    void updateStatus(bool isOnline);
 private slots:
     void onSendClicked();
     void onMessageReceived(const ChatMessage &msg);
-    void onHistoryReceived(const QList<ChatMessage> &history);  // 🔴 НОВЫЙ СЛОТ
-
+    void onHistoryReceived(const ChatMessage &msg);
+    void onAttachClicked();
 private:
-    void addMyMessage(const QString &content);
-    void addOtherMessage(const QString &from, const QString &content);
+    void sendFileToServer(const QString &filePath);
+    void addFileMessage(const QString &filename, const QString &fileId);
+    void downloadFile(const QString &fileId);
 
+    void addMessage(const QString &content, bool isMine, const QString &time = QString());
+    void addOtherMessage(const QString &from, const QString &content);
+    void updateAvatar();
 private:
     Ui::ChatWidget *ui;
     ChatClient *m_client;

@@ -1,0 +1,135 @@
+/* Стили для облачков в списке сообщений */
+QListWidget#chatDisplay::item {
+    border: none;
+    margin: 4px 8px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    background-color: #2a2a3e;
+    color: #e0e0e0;
+    font-size: 14px;
+}
+QListWidget#chatDisplay::item {
+    border-radius: 16px;
+    padding: 6px 12px;
+    margin: 4px 8px;
+    border: none;
+}
+QWidget {
+    background-color: #1a1a2e;
+}
+QScrollArea {
+    background-color: #14141f;
+    border: none;
+}
+QScrollArea > QWidget > QWidget {
+    background-color: #14141f;
+}
+QListWidget#chatDisplay::item {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+/* Свои сообщения (отправленные нами) — будут выделяться цветом */
+QListWidget#chatDisplay::item:selected {
+    background-color: #9146ff; /* фиолетовый фон для выделения (но можно менять в коде) */
+}
+/* Верхняя панель главного окна */
+QMenuBar {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    border-bottom: 1px solid #2a2a3e;
+}
+QMenuBar::item:selected {
+    background-color: #2a2a4a;
+}
+QMenuBar::item:pressed {
+    background-color: #3a3a5a;
+}
+QMainWindow, QWidget#centralwidget {
+    background-color: #1a1a2e;
+}
+QWidget#headerWidget {
+    background-color: #1e1e2f;
+    border-bottom: 1px solid #2a2a3e;
+}
+QWidget#titleBar {
+    background-color: #1e1e2f;
+    border-bottom: 1px solid #2a2a3e;
+}
+/* ===== КНОПКИ УПРАВЛЕНИЯ ОКНОМ ===== */
+QPushButton#minimizeButton,
+QPushButton#maximizeButton,
+QPushButton#closeButton {
+    color: #e0e0e0;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+QPushButton#closeButton:hover {
+    color: white;
+    background-color: #e81123;
+}
+
+QPushButton#minimizeButton:hover,
+QPushButton#maximizeButton:hover {
+    color: white;
+    background-color: #2a2a4a;
+}
+
+/* ===== КНОПКА ВЫХОДА (внизу слева) ===== */
+QPushButton#logoutButton {
+    color: #e0e0e0;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+QPushButton#logoutButton:hover {
+    color: white;
+    background-color: #3a3a4e;
+}
+
+/* ===== КНОПКА ОТПРАВКИ СООБЩЕНИЯ ===== */
+QPushButton#sendButton {
+    background-color: #9146ff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+QPushButton#sendButton:hover {
+    background-color: #7a3cdb;
+}
+
+QPushButton#sendButton:pressed {
+    background-color: #5a2a8b;
+}
+
+/* ===== КНОПКА ПРИКРЕПЛЕНИЯ ФАЙЛА ===== */
+QPushButton#attachButton {
+    background-color: transparent;
+    color: #e0e0e0;
+    border: none;
+    font-size: 20px;
+}
+
+QPushButton#attachButton:hover {
+    color: #9146ff;
+}
+
+/* ===== КНОПКА В КАСТОМНОЙ ШАПКЕ (ЕСЛИ ЕСТЬ) ===== */
+QPushButton#titleBar QPushButton {
+    color: #e0e0e0;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+}
+
+QPushButton#titleBar QPushButton:hover {
+    background-color: #2a2a4a;
+    color: white;
+}

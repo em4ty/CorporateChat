@@ -50,8 +50,12 @@ void ChatClient::registerUser(const QString &username, const QString &password)
 }
 void ChatClient::requestHistory(const QString &withUser)
 {
-    if(!m_authenticated) return;
+    if(!m_authenticated){
+        qDebug() << "requestHistory: not authenticated";
+        return;
+    }
 
+    qDebug() << "requestHistory: requesting history for" << withUser;
     ChatMessage msg;
     msg.type = MsgType::History;
     msg.from = m_username;
@@ -116,15 +120,25 @@ void ChatClient::onReadyRead()
 
             if(msg.type == MsgType::LoginOK) {
                 m_authenticated = true;
-                qDebug() << "✅ " << msg.content;
-            } else if(msg.type == MsgType::LoginFailed) {
+                qDebug() << " " << msg.content;
+            }
+            else if(msg.type == MsgType::History) {
+                qDebug() << "[CLIENT] History received, content:" << msg.content;
+                emit historyReceived(msg);   // <-- эмитим отдельный сигнал
+            }
+            else if (msg.type == MsgType::Status) {
+                bool isOnline = (msg.content == "online");
+                emit statusReceived(msg.from, isOnline);
+            }
+            else if(msg.type == MsgType::LoginFailed) {
                 emit errorOccurred(msg.content);
             } else if(msg.type == MsgType::RegisterOK) {
-                qDebug() << "✅ " << msg.content;
+                qDebug() << " " << msg.content;
             } else if(msg.type == MsgType::RegisterFailed) {
-                qDebug() << "❌ " << msg.content;
-            } else if(msg.type == MsgType::UserList) {
-                // 🔴 ОБРАБОТКА СПИСКА ПОЛЬЗОВАТЕЛЕЙ
+                qDebug() << " " << msg.content;
+            }
+            else if(msg.type == MsgType::UserList) {
+                // ОБРАБОТКА СПИСКА ПОЛЬЗОВАТЕЛЕЙ
                 // Формат: "user1:online,user2:offline,user3:online"
                 QStringList userStatuses = msg.content.split(",", Qt::SkipEmptyParts);
 
@@ -137,14 +151,15 @@ void ChatClient::onReadyRead()
                 }
 
                 emit userListReceived(users);
+
             } else if(msg.type == MsgType::TextMessage) {
                 if(msg.to.isEmpty()) {
-                    qDebug() << "📢 [BROADCAST from " << msg.from << "]: " << msg.content;
+                    qDebug() << " [BROADCAST from " << msg.from << "]: " << msg.content;
                 } else {
-                    qDebug() << "💬 [" << msg.from << " → " << msg.to << "]: " << msg.content;
+                    qDebug() << " [" << msg.from << " → " << msg.to << "]: " << msg.content;
                 }
             } else if(msg.type == MsgType::Status) {
-                qDebug() << "📡 User " << msg.from << " is " << msg.content;
+                qDebug() << " User " << msg.from << " is " << msg.content;
             }
 
             emit messageReceived(msg);

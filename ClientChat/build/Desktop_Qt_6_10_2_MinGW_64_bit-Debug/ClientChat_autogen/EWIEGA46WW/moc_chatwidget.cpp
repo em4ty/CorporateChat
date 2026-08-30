@@ -8,7 +8,6 @@
 
 #include "../../../../chatwidget.h"
 #include <QtCore/qmetatype.h>
-#include <QtCore/QList>
 
 #include <QtCore/qtmochelpers.h>
 
@@ -46,8 +45,7 @@ template <> constexpr inline auto ChatWidget::qt_create_metaobjectdata<qt_meta_t
         "ChatMessage",
         "msg",
         "onHistoryReceived",
-        "QList<ChatMessage>",
-        "history"
+        "onAttachClicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -58,9 +56,11 @@ template <> constexpr inline auto ChatWidget::qt_create_metaobjectdata<qt_meta_t
             { 0x80000000 | 4, 5 },
         }}),
         // Slot 'onHistoryReceived'
-        QtMocHelpers::SlotData<void(const QList<ChatMessage> &)>(6, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { 0x80000000 | 7, 8 },
+        QtMocHelpers::SlotData<void(const ChatMessage &)>(6, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { 0x80000000 | 4, 5 },
         }}),
+        // Slot 'onAttachClicked'
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -86,7 +86,8 @@ void ChatWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->onSendClicked(); break;
         case 1: _t->onMessageReceived((*reinterpret_cast<std::add_pointer_t<ChatMessage>>(_a[1]))); break;
-        case 2: _t->onHistoryReceived((*reinterpret_cast<std::add_pointer_t<QList<ChatMessage>>>(_a[1]))); break;
+        case 2: _t->onHistoryReceived((*reinterpret_cast<std::add_pointer_t<ChatMessage>>(_a[1]))); break;
+        case 3: _t->onAttachClicked(); break;
         default: ;
         }
     }
@@ -111,14 +112,14 @@ int ChatWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }

@@ -18,19 +18,30 @@ enum class MsgType {
     UserList = 8,       // список пользователей
     Status = 9,         // статус пользователя (онлайн/офлайн)
     Logout = 10,         // выход
-    History = 11
+    History = 11,
+    File = 12,
+    FileAck = 13,
+    FileTransferStart = 14, // клиент сообщает серверу, что хочет передать файл
+    FileTransferAck = 15, // севрвер подтверждает, что готов принять
+    FileTransferEnd= 16, // конец передачи
+    FileInfo = 17,      // уведомление о файле (имя + ID)
+    FileRequest = 18,   // запрос на скачивание по ID
+    FileResponse = 19,  // конец передачи
 };
 
 // Структура сообщения
 struct ChatMessage
 {
+
     MsgType type;           // тип сообщения
     QString from;           // отправитель
     QString to;             // получатель (пусто для всех)
     QString content;        // содержимое
     QString messageId;      // уникальный ID сообщения
     QDateTime timestamp;    // время отправки
-
+    QString fileId;      // уникальный ID файла (генерирует сервер)
+    QString fileName;    // имя файла (для отображения)
+    quint64 fileSize;    // размер в байтах
     // Сериализация в JSON
     QJsonObject toJson() const {
         QJsonObject obj;
@@ -40,6 +51,9 @@ struct ChatMessage
         obj["content"] = content;
         obj["messageId"] = messageId;
         obj["timestamp"] = timestamp.toString(Qt::ISODate);
+        obj["fileName"] = fileName;
+        obj["fileId"] = fileId;
+        obj["fileSize"] = static_cast<qint64>(fileSize);
         return obj;
     }
 
@@ -52,6 +66,9 @@ struct ChatMessage
         msg.content = obj["content"].toString();
         msg.messageId = obj["messageId"].toString();
         msg.timestamp = QDateTime::fromString(obj["timestamp"].toString(), Qt::ISODate);
+        msg.fileName = obj["fileName"].toString();
+        msg.fileSize = static_cast<quint64>(obj["fileSize"].toInteger());
+        msg.fileId = obj["fileId"].toString();
         return msg;
     }
 };

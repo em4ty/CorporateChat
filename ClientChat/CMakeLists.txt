@@ -34,6 +34,8 @@ add_executable(ClientChat
   chatwidget.h
 
 
+
+
 )
 target_link_libraries(ClientChat
     Qt${QT_VERSION_MAJOR}::Core

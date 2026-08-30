@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>430</width>
+    <height>323</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,91 @@
    <iconset theme="dialog-information"/>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
-    background-color: #f0f0f0;
+   <string notr="true">/* Базовые цвета */
+QWidget {
+    background-color: #1a1a2e;
+    color: #ffffff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Кнопки */
+QPushButton {
+    background-color: #9146ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #7a3cdb;
+}
+QPushButton:pressed {
+    background-color: #5a2a8b;
+}
+QPushButton#logoutButton {
+    background-color: #e94560;
+}
+QPushButton#logoutButton:hover {
+    background-color: #c73a54;
+}
+
+/* Поля ввода */
+QLineEdit {
+    background-color: #16213e;
+    border: 1px solid #9146ff;
+    border-radius: 10px;
+    padding: 10px;
+    color: #ffffff;
+}
+QLineEdit:focus {
+    border: 2px solid #b388ff;
+}
+
+/* Вкладки (для окна логина) */
+QTabWidget::pane {
+    border: 1px solid #9146ff;
+    border-radius: 12px;
+    background-color: #0f3460;
+}
+QTabBar::tab {
+    background-color: #16213e;
+    color: #aaaaaa;
+    padding: 10px 20px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+QTabBar::tab:selected {
+    background-color: #9146ff;
+    color: white;
+}
+
+/* Списки (контакты, чат) */
+QListWidget {
+    background-color: #16213e;
+    border: 1px solid #9146ff;
+    border-radius: 12px;
+    padding: 5px;
+}
+QListWidget::item {
+    padding: 8px;
+    border-radius: 6px;
+    color: #dddddd;
+}
+QListWidget::item:selected {
+    background-color: #9146ff;
+    color: white;
+}
+QListWidget::item:hover {
+    background-color: #2a2a4a;
+}
+
+/* Метки (статус, заголовки) */
+QLabel {
+    color: #cccccc;
+}
+QLabel#statusLabel {
+    color: #aaaaaa;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -26,6 +109,7 @@
     <widget class="QTabWidget" name="tabWidget">
      <property name="font">
       <font>
+       <family>Segoe UI</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -44,6 +128,9 @@ QTabBar::tab:selected {
     color: white;
 }</string>
      </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
        <string>🔐 Вход</string>
@@ -51,9 +138,6 @@ QTabBar::tab:selected {
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QLineEdit" name="usernameEdit">
-         <property name="placeholderText">
-          <string>👤 Имя пользователя</string>
-         </property>
          <property name="styleSheet">
           <string notr="true">QLineEdit {
     border: 1px solid #ccc;
@@ -61,17 +145,14 @@ QTabBar::tab:selected {
     padding: 8px;
     margin: 5px;
 }</string>
+         </property>
+         <property name="placeholderText">
+          <string>Имя пользователя</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="passwordEdit">
-         <property name="echoMode">
-          <enum>QLineEdit::Password</enum>
-         </property>
-         <property name="placeholderText">
-          <string>🔒 Пароль</string>
-         </property>
          <property name="styleSheet">
           <string notr="true">QLineEdit {
     border: 1px solid #ccc;
@@ -80,13 +161,22 @@ QTabBar::tab:selected {
     margin: 5px;
 }</string>
          </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="echoMode">
+          <enum>QLineEdit::EchoMode::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>Пароль</string>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="loginButton">
-         <property name="text">
-          <string>🚀 Войти</string>
-         </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
     background-color: #28a745;
@@ -100,6 +190,9 @@ QPushButton:hover {
     background-color: #218838;
 }</string>
          </property>
+         <property name="text">
+          <string>Войти</string>
+         </property>
         </widget>
        </item>
       </layout>
@@ -111,9 +204,6 @@ QPushButton:hover {
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QLineEdit" name="regUsernameEdit">
-         <property name="placeholderText">
-          <string>👤 Имя пользователя</string>
-         </property>
          <property name="styleSheet">
           <string notr="true">QLineEdit {
     border: 1px solid #ccc;
@@ -121,17 +211,14 @@ QPushButton:hover {
     padding: 8px;
     margin: 5px;
 }</string>
+         </property>
+         <property name="placeholderText">
+          <string>Имя пользователя</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="regPasswordEdit">
-         <property name="echoMode">
-          <enum>QLineEdit::Password</enum>
-         </property>
-         <property name="placeholderText">
-          <string>🔒 Пароль</string>
-         </property>
          <property name="styleSheet">
           <string notr="true">QLineEdit {
     border: 1px solid #ccc;
@@ -139,17 +226,17 @@ QPushButton:hover {
     padding: 8px;
     margin: 5px;
 }</string>
+         </property>
+         <property name="echoMode">
+          <enum>QLineEdit::EchoMode::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>Пароль</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="regConfirmEdit">
-         <property name="echoMode">
-          <enum>QLineEdit::Password</enum>
-         </property>
-         <property name="placeholderText">
-          <string>🔒 Подтверждение пароля</string>
-         </property>
          <property name="styleSheet">
           <string notr="true">QLineEdit {
     border: 1px solid #ccc;
@@ -158,13 +245,16 @@ QPushButton:hover {
     margin: 5px;
 }</string>
          </property>
+         <property name="echoMode">
+          <enum>QLineEdit::EchoMode::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>Подтверждение пароля</string>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="registerButton">
-         <property name="text">
-          <string>📝 Зарегистрироваться</string>
-         </property>
          <property name="styleSheet">
           <string notr="true">QPushButton {
     background-color: #0078d7;
@@ -178,6 +268,9 @@ QPushButton:hover {
     background-color: #005a9e;
 }</string>
          </property>
+         <property name="text">
+          <string>Зарегистрироваться</string>
+         </property>
         </widget>
        </item>
       </layout>
@@ -188,14 +281,9 @@ QPushButton:hover {
     <widget class="QLabel" name="statusLabel">
      <property name="font">
       <font>
+       <family>Segoe UI</family>
        <pointsize>9</pointsize>
       </font>
-     </property>
-     <property name="text">
-      <string>💡 Введите данные для входа</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel {
@@ -203,8 +291,16 @@ QPushButton:hover {
     padding: 5px;
 }</string>
      </property>
+     <property name="text">
+      <string>Введите данные для входа</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
     </widget>
    </item>
   </layout>
  </widget>
+ <resources/>
+ <connections/>
 </ui>

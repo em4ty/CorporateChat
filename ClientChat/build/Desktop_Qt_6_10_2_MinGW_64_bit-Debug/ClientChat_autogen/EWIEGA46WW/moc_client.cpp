@@ -8,7 +8,6 @@
 
 #include "../../../../client.h"
 #include <QtCore/qmetatype.h>
-#include <QtCore/QList>
 
 #include <QtCore/qtmochelpers.h>
 
@@ -40,8 +39,11 @@ template <> constexpr inline auto ChatClient::qt_create_metaobjectdata<qt_meta_t
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "ChatClient",
-        "connected",
+        "statusReceived",
         "",
+        "username",
+        "isOnline",
+        "connected",
         "disconnected",
         "messageReceived",
         "ChatMessage",
@@ -52,40 +54,42 @@ template <> constexpr inline auto ChatClient::qt_create_metaobjectdata<qt_meta_t
         "QMap<QString,bool>",
         "users",
         "historyReceived",
-        "QList<ChatMessage>",
-        "history",
         "onReadyRead",
         "onConnected",
         "onDisconnected"
     };
 
     QtMocHelpers::UintData qt_methods {
+        // Signal 'statusReceived'
+        QtMocHelpers::SignalData<void(const QString &, bool)>(1, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 3 }, { QMetaType::Bool, 4 },
+        }}),
         // Signal 'connected'
-        QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SignalData<void()>(5, 2, QMC::AccessPublic, QMetaType::Void),
         // Signal 'disconnected'
-        QtMocHelpers::SignalData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::SignalData<void()>(6, 2, QMC::AccessPublic, QMetaType::Void),
         // Signal 'messageReceived'
-        QtMocHelpers::SignalData<void(const ChatMessage &)>(4, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 5, 6 },
+        QtMocHelpers::SignalData<void(const ChatMessage &)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 8, 9 },
         }}),
         // Signal 'errorOccurred'
-        QtMocHelpers::SignalData<void(const QString &)>(7, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 8 },
+        QtMocHelpers::SignalData<void(const QString &)>(10, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 11 },
         }}),
         // Signal 'userListReceived'
-        QtMocHelpers::SignalData<void(const QMap<QString,bool> &)>(9, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { 0x80000000 | 10, 11 },
-        }}),
-        // Signal 'historyReceived'
-        QtMocHelpers::SignalData<void(const QList<ChatMessage> &)>(12, 2, QMC::AccessPublic, QMetaType::Void, {{
+        QtMocHelpers::SignalData<void(const QMap<QString,bool> &)>(12, 2, QMC::AccessPublic, QMetaType::Void, {{
             { 0x80000000 | 13, 14 },
         }}),
+        // Signal 'historyReceived'
+        QtMocHelpers::SignalData<void(const ChatMessage &)>(15, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { 0x80000000 | 8, 9 },
+        }}),
         // Slot 'onReadyRead'
-        QtMocHelpers::SlotData<void()>(15, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onConnected'
         QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPrivate, QMetaType::Void),
-        // Slot 'onDisconnected'
+        // Slot 'onConnected'
         QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onDisconnected'
+        QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -109,30 +113,33 @@ void ChatClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
     auto *_t = static_cast<ChatClient *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->connected(); break;
-        case 1: _t->disconnected(); break;
-        case 2: _t->messageReceived((*reinterpret_cast<std::add_pointer_t<ChatMessage>>(_a[1]))); break;
-        case 3: _t->errorOccurred((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
-        case 4: _t->userListReceived((*reinterpret_cast<std::add_pointer_t<QMap<QString,bool>>>(_a[1]))); break;
-        case 5: _t->historyReceived((*reinterpret_cast<std::add_pointer_t<QList<ChatMessage>>>(_a[1]))); break;
-        case 6: _t->onReadyRead(); break;
-        case 7: _t->onConnected(); break;
-        case 8: _t->onDisconnected(); break;
+        case 0: _t->statusReceived((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast<std::add_pointer_t<bool>>(_a[2]))); break;
+        case 1: _t->connected(); break;
+        case 2: _t->disconnected(); break;
+        case 3: _t->messageReceived((*reinterpret_cast<std::add_pointer_t<ChatMessage>>(_a[1]))); break;
+        case 4: _t->errorOccurred((*reinterpret_cast<std::add_pointer_t<QString>>(_a[1]))); break;
+        case 5: _t->userListReceived((*reinterpret_cast<std::add_pointer_t<QMap<QString,bool>>>(_a[1]))); break;
+        case 6: _t->historyReceived((*reinterpret_cast<std::add_pointer_t<ChatMessage>>(_a[1]))); break;
+        case 7: _t->onReadyRead(); break;
+        case 8: _t->onConnected(); break;
+        case 9: _t->onDisconnected(); break;
         default: ;
         }
     }
     if (_c == QMetaObject::IndexOfMethod) {
-        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)()>(_a, &ChatClient::connected, 0))
+        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)(const QString & , bool )>(_a, &ChatClient::statusReceived, 0))
             return;
-        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)()>(_a, &ChatClient::disconnected, 1))
+        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)()>(_a, &ChatClient::connected, 1))
             return;
-        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)(const ChatMessage & )>(_a, &ChatClient::messageReceived, 2))
+        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)()>(_a, &ChatClient::disconnected, 2))
             return;
-        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)(const QString & )>(_a, &ChatClient::errorOccurred, 3))
+        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)(const ChatMessage & )>(_a, &ChatClient::messageReceived, 3))
             return;
-        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)(const QMap<QString,bool> & )>(_a, &ChatClient::userListReceived, 4))
+        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)(const QString & )>(_a, &ChatClient::errorOccurred, 4))
             return;
-        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)(const QList<ChatMessage> & )>(_a, &ChatClient::historyReceived, 5))
+        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)(const QMap<QString,bool> & )>(_a, &ChatClient::userListReceived, 5))
+            return;
+        if (QtMocHelpers::indexOfMethod<void (ChatClient::*)(const ChatMessage & )>(_a, &ChatClient::historyReceived, 6))
             return;
     }
 }
@@ -156,51 +163,57 @@ int ChatClient::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 10)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 9;
+        _id -= 10;
     }
     return _id;
 }
 
 // SIGNAL 0
-void ChatClient::connected()
+void ChatClient::statusReceived(const QString & _t1, bool _t2)
 {
-    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
+    QMetaObject::activate<void>(this, &staticMetaObject, 0, nullptr, _t1, _t2);
 }
 
 // SIGNAL 1
-void ChatClient::disconnected()
+void ChatClient::connected()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, nullptr);
 }
 
 // SIGNAL 2
-void ChatClient::messageReceived(const ChatMessage & _t1)
+void ChatClient::disconnected()
 {
-    QMetaObject::activate<void>(this, &staticMetaObject, 2, nullptr, _t1);
+    QMetaObject::activate(this, &staticMetaObject, 2, nullptr);
 }
 
 // SIGNAL 3
-void ChatClient::errorOccurred(const QString & _t1)
+void ChatClient::messageReceived(const ChatMessage & _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 3, nullptr, _t1);
 }
 
 // SIGNAL 4
-void ChatClient::userListReceived(const QMap<QString,bool> & _t1)
+void ChatClient::errorOccurred(const QString & _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 4, nullptr, _t1);
 }
 
 // SIGNAL 5
-void ChatClient::historyReceived(const QList<ChatMessage> & _t1)
+void ChatClient::userListReceived(const QMap<QString,bool> & _t1)
 {
     QMetaObject::activate<void>(this, &staticMetaObject, 5, nullptr, _t1);
+}
+
+// SIGNAL 6
+void ChatClient::historyReceived(const ChatMessage & _t1)
+{
+    QMetaObject::activate<void>(this, &staticMetaObject, 6, nullptr, _t1);
 }
 QT_WARNING_POP
